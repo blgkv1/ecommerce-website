@@ -26,7 +26,7 @@
 
 ## Quick Start
 
-https://github.com/blgkv1/ecommerce-website
+https://blgkv1.github.io/ecommerce-website/
 
 or
 
