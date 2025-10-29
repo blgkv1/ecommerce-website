@@ -26,6 +26,10 @@
 
 ## Quick Start
 
+https://github.com/blgkv1/ecommerce-website
+
+or
+
 ```bash
 git clone https://github.com/blgkv1/ecommerce-website.git
 cd ecommerce-website
