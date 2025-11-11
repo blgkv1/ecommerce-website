@@ -5,4 +5,14 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/ecommerce-website/",
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+      },
+      "/images": {
+        target: "http://localhost:3000",
+      },
+    },
+  },
 });
