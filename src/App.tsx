@@ -11,9 +11,15 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/cart-items?expand=product").then((response) => {
-      setCart(response.data);
-    });
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get("/api/cart-items?expand=product");
+        setCart(response.data);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    };
+    fetchCartItems();
   }, []);
 
   return (

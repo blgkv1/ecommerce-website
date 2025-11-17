@@ -4,13 +4,19 @@ import Header from "../../components/Header";
 import ProductsGrid from "./ProductsGrid";
 import "./HomePage.css";
 
-function HomePage({ cart }) {
+function HomePage({ cart }: { cart: any[] }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/products").then((response) => {
-      setProducts(response.data);
-    });
+    const fetchHomeData = async () => {
+      try {
+        const response = await axios.get("/api/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchHomeData();
   }, []);
 
   return (
