@@ -1,13 +1,18 @@
 import Header from "../components/Header";
 import "./TrackingPage.css";
 import { Link } from "react-router";
+import type { CartItem } from "../types/cart";
 
-function TrackingPage() {
+interface TrackingPageProps {
+  cart: CartItem[];
+}
+
+function TrackingPage({ cart }: TrackingPageProps) {
   return (
     <>
       <title>Tracking</title>
 
-      <Header />
+      <Header cart={cart} />
 
       <div className="tracking-page">
         <div className="order-tracking">

@@ -1,9 +1,14 @@
 import formatMoney from "../../utils/money";
+import type { Product } from "../../types/products";
 
-function ProductsGrid({ products }) {
+interface ProductsGridProps {
+  products: Product[];
+}
+
+function ProductsGrid({ products }: ProductsGridProps) {
   return (
     <div className="products-grid">
-      {products.map((product) => {
+      {products.map((product: Product) => {
         return (
           <div key={product.id} className="product-container">
             <div className="product-image-container">
