@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Routes, Route } from "react-router-dom";
+import type { CartItem } from "./types/cart";
 import "./App.css";
 import HomePage from "./pages/home/HomePage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
@@ -8,7 +9,7 @@ import TrackingPage from "./pages/TrackingPage";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const fetchCartItems = async () => {

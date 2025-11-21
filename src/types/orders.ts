@@ -1,9 +1,7 @@
+import type { Product } from "./products";
+
 export interface OrderProduct {
-  product: {
-    id: string;
-    name: string;
-    image: string;
-  };
+  product: Product;
   quantity: number;
   estimatedDeliveryTimeMs: number;
 }

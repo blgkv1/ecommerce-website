@@ -1,4 +1,5 @@
 // 7:37:17
+import type { CartItem } from "../../types/cart";
 import formatMoney from "../../utils/money";
 import dayjs from "dayjs";
 import axios from "axios";
@@ -8,7 +9,11 @@ import "./OrdersPage.css";
 import { useEffect, useState, Fragment } from "react";
 import type { Order } from "../../types/orders";
 
-function OrdersPage({ cart }: { cart: any[] }) {
+interface OrdersPageProps {
+  cart: CartItem[];
+}
+
+function OrdersPage({ cart }: OrdersPageProps) {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {

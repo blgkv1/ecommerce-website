@@ -1,7 +1,12 @@
+import type { CartItem } from "../types/cart";
 import { Link } from "react-router";
 import "./Header.css";
 
-function Header({ cart }) {
+interface HeaderProps {
+  cart: CartItem[];
+}
+
+function Header({ cart }: HeaderProps) {
   let totalQuantity = 0;
 
   cart.forEach((cartItem) => {
