@@ -6,9 +6,10 @@ import { Link } from "react-router";
 import Header from "../../components/Header";
 import "./OrdersPage.css";
 import { useEffect, useState, Fragment } from "react";
+import type { Order } from "../../types/orders";
 
 function OrdersPage({ cart }: { cart: any[] }) {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
