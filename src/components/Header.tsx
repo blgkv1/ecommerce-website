@@ -1,12 +1,13 @@
 import type { CartItem } from "../types/cart";
 import { Link } from "react-router";
 import "./Header.css";
+import type { JSX } from "react";
 
 interface HeaderProps {
   cart: CartItem[];
 }
 
-function Header({ cart }: HeaderProps) {
+function Header({ cart }: HeaderProps): JSX.Element {
   let totalQuantity = 0;
 
   cart.forEach((cartItem) => {

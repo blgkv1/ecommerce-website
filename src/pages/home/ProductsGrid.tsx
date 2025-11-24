@@ -1,11 +1,12 @@
 import formatMoney from "../../utils/money";
 import type { Product } from "../../types/products";
+import type { JSX } from "react";
 
 interface ProductsGridProps {
   products: Product[];
 }
 
-function ProductsGrid({ products }: ProductsGridProps) {
+function ProductsGrid({ products }: ProductsGridProps): JSX.Element {
   return (
     <div className="products-grid">
       {products.map((product: Product) => {
