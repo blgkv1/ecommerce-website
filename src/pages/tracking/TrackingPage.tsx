@@ -1,7 +1,7 @@
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import "./TrackingPage.css";
 import { Link } from "react-router";
-import type { CartItem } from "../types/cart";
+import type { CartItem } from "../../types/cart";
 
 interface TrackingPageProps {
   cart: CartItem[];
