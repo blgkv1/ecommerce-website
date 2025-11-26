@@ -1,4 +1,6 @@
 import type { CartItem } from "../../types/cart";
+import { Link } from "react-router";
+import "./CheckoutHeader.css";
 
 function CheckoutHeader({ cart }: { cart: CartItem[] }) {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -6,17 +8,17 @@ function CheckoutHeader({ cart }: { cart: CartItem[] }) {
     <div className="checkout-header">
       <div className="header-content">
         <div className="checkout-header-left-section">
-          <a href="/">
+          <Link to="/">
             <img className="logo" src="images/logo.png" />
             <img className="mobile-logo" src="images/mobile-logo.png" />
-          </a>
+          </Link>
         </div>
 
         <div className="checkout-header-middle-section">
           Checkout (
-          <a className="return-to-home-link" href="/">
+          <Link className="return-to-home-link" to="/">
             {totalItems} items
-          </a>
+          </Link>
           )
         </div>
 

@@ -2,12 +2,17 @@ import Header from "../../components/Header";
 import "./TrackingPage.css";
 import { Link } from "react-router";
 import type { CartItem } from "../../types/cart";
+import { useParams } from "react-router";
 
 interface TrackingPageProps {
   cart: CartItem[];
 }
 
 function TrackingPage({ cart }: TrackingPageProps) {
+  const { orderId, productId } = useParams<{
+    orderId: string;
+    productId: string;
+  }>();
   return (
     <>
       <title>Tracking</title>
