@@ -38,6 +38,10 @@
   border: 1px solid white;
 }
 
+.header .orders-link.active {
+  text-decoration: underline;
+}
+
 .header .logo {
   height: 30px;
   margin-top: 1px;
