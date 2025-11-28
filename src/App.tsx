@@ -7,6 +7,7 @@ import CheckoutPage from "./pages/checkout/CheckoutPage";
 import OrdersPage from "./pages/orders/OrdersPage";
 import TrackingPage from "./pages/tracking/TrackingPage";
 import { useState, useEffect } from "react";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -32,6 +33,7 @@ function App() {
         path="tracking/:orderId/:productId"
         element={<TrackingPage cart={cart} />}
       />
+      <Route path="*" element={<NotFound cart={cart} />} />
     </Routes>
   );
 }
