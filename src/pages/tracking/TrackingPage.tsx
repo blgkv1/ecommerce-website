@@ -1,13 +1,48 @@
 import Header from "../../components/Header";
 import "./TrackingPage.css";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import type { CartItem } from "../../types/cart";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 
 interface TrackingPageProps {
   cart: CartItem[];
 }
 
 function TrackingPage({ cart }: TrackingPageProps) {
+  const { orderId, productId } = useParams<{
+    orderId: string;
+    productId: string;
+  }>();
+  type Order = {
+    id: string;
+    products?: any[];
+  };
+  const [order, setOrder] = useState<Order | null>(null);
+
+  useEffect(() => {
+    const fetchTrackingData = async () => {
+      try {
+        const response = await axios.get(
+          `/api/orders/${orderId}?expand=products`
+        );
+        setOrder(response.data);
+      } catch (error) {
+        console.error("Error fetching tracking data:", error);
+      }
+    };
+    fetchTrackingData();
+  }, [orderId]);
+
+  if (!order) {
+    return <div>Loading...</div>;
+  }
+
+  const trackedProduct = order.products?.find(
+    (product: any) => product.productId.toString() === productId
+  );
+
   return (
     <>
       <title>Tracking</title>
@@ -20,18 +55,20 @@ function TrackingPage({ cart }: TrackingPageProps) {
             View all orders
           </Link>
 
-          <div className="delivery-date">Arriving on Monday, June 13</div>
-
-          <div className="product-info">
-            Black and Gray Athletic Cotton Socks - 6 Pairs
+          <div className="delivery-date">
+            Arriving on{" "}
+            {dayjs(trackedProduct?.estimatedDeliveryTime).format(
+              "MMMM D, YYYY"
+            )}
           </div>
 
-          <div className="product-info">Quantity: 1</div>
+          <div className="product-info">{trackedProduct.product.name}</div>
 
-          <img
-            className="product-image"
-            src="images/products/athletic-cotton-socks-6-pairs.jpg"
-          />
+          <div className="product-info">
+            Quantity: {trackedProduct.quantity}
+          </div>
+
+          <img className="product-image" src={trackedProduct.product.image} />
 
           <div className="progress-labels-container">
             <div className="progress-label">Preparing</div>
