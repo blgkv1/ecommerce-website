@@ -1,3 +1,4 @@
+import axios from "axios";
 import formatMoney from "../../utils/money";
 import type { Product } from "../../types/products";
 import type { JSX } from "react";
@@ -6,7 +7,7 @@ interface ProductsGridProps {
   products: Product[];
 }
 
-function ProductsGrid({ products }: ProductsGridProps): JSX.Element {
+function ProductsGrid({ products, loadCart }: ProductsGridProps): JSX.Element {
   return (
     <div className="products-grid">
       {products.map((product: Product) => {
@@ -56,7 +57,16 @@ function ProductsGrid({ products }: ProductsGridProps): JSX.Element {
               Added
             </div>
 
-            <button className="add-to-cart-button button-primary">
+            <button
+              className="add-to-cart-button button-primary"
+              onClick={async () => {
+                await axios.post("/api/cart-items", {
+                  productId: product.id,
+                  quantity: 1,
+                });
+                await loadCart();
+              }}
+            >
               Add to Cart
             </button>
           </div>
