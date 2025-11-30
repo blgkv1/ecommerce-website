@@ -1,4 +1,4 @@
-export interface Product {
+export interface CartProduct {
   id: string;
   image: string;
   name: string;
