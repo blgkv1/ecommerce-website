@@ -5,9 +5,11 @@ import DeliveryDate from "./DeliveryDate";
 function OrderSummary({
   cart,
   deliveryOptions,
+  loadCart,
 }: {
   cart: any[];
   deliveryOptions: any[];
+  loadCart: () => void;
 }) {
   return (
     <div className="order-summary">
@@ -29,6 +31,7 @@ function OrderSummary({
                 <DeliveryOptions
                   cartItem={cartItem}
                   deliveryOptions={deliveryOptions}
+                  loadCart={loadCart}
                 />
               </div>
             </div>
