@@ -29,7 +29,7 @@ function CheckoutPage({
       }
     };
     fetchCheckoutData();
-  }, []);
+  }, [cart]);
 
   return (
     <>
