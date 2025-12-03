@@ -13,6 +13,18 @@ function Product({
 }): JSX.Element {
   const [quantity, setQuantity] = useState(1);
 
+  const addToCart = async () => {
+    await axios.post("/api/cart-items", {
+      productId: product.id,
+      quantity,
+    });
+    loadCart();
+  };
+
+  const selectQuantity = (e) => {
+    setQuantity(Number(e.target.value));
+  };
+
   return (
     <div className="product-container">
       <div className="product-image-container">
@@ -34,12 +46,7 @@ function Product({
       <div className="product-price">{formatMoney(product.priceCents)}</div>
 
       <div className="product-quantity-container">
-        <select
-          value={quantity}
-          onChange={(e) => {
-            setQuantity(Number(e.target.value));
-          }}
-        >
+        <select value={quantity} onChange={selectQuantity}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -60,16 +67,7 @@ function Product({
         Added
       </div>
 
-      <button
-        className="add-to-cart-button button-primary"
-        onClick={async () => {
-          await axios.post("/api/cart-items", {
-            productId: product.id,
-            quantity,
-          });
-          loadCart();
-        }}
-      >
+      <button className="add-to-cart-button button-primary" onClick={addToCart}>
         Add to Cart
       </button>
     </div>
