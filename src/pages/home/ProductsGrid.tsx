@@ -4,6 +4,7 @@ import Product from "./Product";
 
 interface ProductsGridProps {
   products: CartProduct[];
+  loadCart: () => void;
 }
 
 function ProductsGrid({ products, loadCart }: ProductsGridProps): JSX.Element {
