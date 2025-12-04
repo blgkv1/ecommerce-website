@@ -1,12 +1,18 @@
 import formatMoney from "../../utils/money";
 import type { CartItem } from "../../types/cart";
-import type { Product } from "../../types/products";
+import type { CartProduct } from "../../types/products";
 
 interface CartItemWithProduct extends CartItem {
-  product: Product;
+  product: CartProduct;
 }
 
-function CartItemDetails({ cartItem }: { cartItem: CartItemWithProduct }) {
+function CartItemDetails({
+  cartItem,
+  deleteCartItem,
+}: {
+  cartItem: CartItemWithProduct;
+  deleteCartItem: () => void;
+}) {
   return (
     <>
       <img className="product-image" src={cartItem.product.image} />
@@ -22,7 +28,12 @@ function CartItemDetails({ cartItem }: { cartItem: CartItemWithProduct }) {
             <span className="quantity-label">{cartItem.quantity}</span>
           </span>
           <span className="update-quantity-link link-primary">Update</span>
-          <span className="delete-quantity-link link-primary">Delete</span>
+          <span
+            className="delete-quantity-link link-primary"
+            onClick={deleteCartItem}
+          >
+            Delete
+          </span>
         </div>
       </div>
     </>
