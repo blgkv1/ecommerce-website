@@ -31,8 +31,6 @@ function CheckoutPage({
     fetchCheckoutData();
   }, [cart]);
 
-  useEffect(() => {});
-
   return (
     <>
       <title>Checkout</title>
