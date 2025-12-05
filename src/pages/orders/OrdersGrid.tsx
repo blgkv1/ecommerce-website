@@ -2,7 +2,13 @@ import type { Order } from "../../types/orders";
 import OrderHeader from "./OrderHeader";
 import OrderDetailsGrid from "./OrderDetailsGrid";
 
-function OrdersGrid({ orders }: { orders: Order[] }) {
+function OrdersGrid({
+  orders,
+  loadCart,
+}: {
+  orders: Order[];
+  loadCart: () => void;
+}) {
   return (
     <div className="orders-grid">
       {orders.map((order) => {
@@ -10,7 +16,7 @@ function OrdersGrid({ orders }: { orders: Order[] }) {
           <div key={order.id} className="order-container">
             <OrderHeader order={order} />
 
-            <OrderDetailsGrid order={order} />
+            <OrderDetailsGrid order={order} loadCart={loadCart} />
           </div>
         );
       })}

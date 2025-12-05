@@ -9,9 +9,10 @@ import OrdersGrid from "./OrdersGrid";
 
 interface OrdersPageProps {
   cart: CartItem[];
+  loadCart: () => void;
 }
 
-function OrdersPage({ cart }: OrdersPageProps) {
+function OrdersPage({ cart, loadCart }: OrdersPageProps) {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function OrdersPage({ cart }: OrdersPageProps) {
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
 
-        <OrdersGrid orders={orders} />
+        <OrdersGrid orders={orders} loadCart={loadCart} />
       </div>
     </>
   );

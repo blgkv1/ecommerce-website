@@ -21,7 +21,7 @@ function Product({
     loadCart();
   };
 
-  const selectQuantity = (e) => {
+  const selectQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setQuantity(Number(e.target.value));
   };
 

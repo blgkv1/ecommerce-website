@@ -2,8 +2,17 @@ import { Fragment } from "react";
 import type { Order } from "../../types/orders";
 import dayjs from "dayjs";
 import { Link } from "react-router";
+import { useAddToCart } from "../../hooks/useAddToCart";
 
-function OrderDetailsGrid({ order }: { order: Order }) {
+function OrderDetailsGrid({
+  order,
+  loadCart,
+}: {
+  order: Order;
+  loadCart: () => void;
+}) {
+  const addToCart = useAddToCart(loadCart);
+
   return (
     <div className="order-details-grid">
       {order.products.map((orderProduct) => {
@@ -22,7 +31,10 @@ function OrderDetailsGrid({ order }: { order: Order }) {
               <div className="product-quantity">
                 Quantity: {orderProduct.quantity}
               </div>
-              <button className="buy-again-button button-primary">
+              <button
+                className="buy-again-button button-primary"
+                onClick={() => addToCart(orderProduct.product.id, 1)}
+              >
                 <img
                   className="buy-again-icon"
                   src="images/icons/buy-again.png"
