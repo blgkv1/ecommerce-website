@@ -16,19 +16,25 @@ function CheckoutPage({
   const [paymentSummary, setPaymentSummary] = useState([null]);
 
   useEffect(() => {
-    const fetchCheckoutData = async () => {
+    const fetchDeliveryOptions = async () => {
       try {
-        let response = await axios.get(
+        const response = await axios.get(
           "/api/delivery-options?expand=estimatedDeliveryTime"
         );
         setDeliveryOptions(response.data);
-        response = await axios.get("/api/payment-summary");
-        setPaymentSummary(response.data);
       } catch (error) {
         console.error("Error fetching checkout data:", error);
       }
     };
-    fetchCheckoutData();
+    fetchDeliveryOptions();
+  }, []);
+
+  useEffect(() => {
+    const fetchPaymentSummary = async () => {
+      const response = await axios.get("/api/payment-summary");
+      setPaymentSummary(response.data);
+    };
+    fetchPaymentSummary();
   }, [cart]);
 
   return (
