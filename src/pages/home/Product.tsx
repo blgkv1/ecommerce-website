@@ -12,6 +12,7 @@ function Product({
   loadCart: () => void;
 }): JSX.Element {
   const [quantity, setQuantity] = useState(1);
+  const [showAdded, setShowAdded] = useState(false);
 
   const addToCart = async () => {
     await axios.post("/api/cart-items", {
@@ -19,6 +20,8 @@ function Product({
       quantity,
     });
     loadCart();
+    setShowAdded(true);
+    setTimeout(() => setShowAdded(false), 2000);
   };
 
   const selectQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -62,7 +65,7 @@ function Product({
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
+      <div className="added-to-cart" style={{ opacity: showAdded ? 1 : 0 }}>
         <img src="images/icons/checkmark.png" />
         Added
       </div>
