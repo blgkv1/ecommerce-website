@@ -1,7 +1,8 @@
 import formatMoney from "../../utils/money";
 import type { CartItem } from "../../types/cart";
 import type { CartProduct } from "../../types/products";
-import { use, useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 interface CartItemWithProduct extends CartItem {
   product: CartProduct;
@@ -10,11 +11,51 @@ interface CartItemWithProduct extends CartItem {
 function CartItemDetails({
   cartItem,
   deleteCartItem,
+  loadCart,
 }: {
   cartItem: CartItemWithProduct;
   deleteCartItem: () => void;
+  loadCart: () => void;
 }) {
-  const [updated, setUpdated] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [quantity, setQuantity] = useState(cartItem.quantity);
+
+  const updateCartItemQuantity = async () => {
+    await axios.put(`/api/cart-items/${cartItem.product.id}`, {
+      quantity: quantity,
+    });
+    setIsUpdating(false);
+    loadCart();
+  };
+
+  const quantityDisplay = isUpdating ? (
+    <>
+      <input
+        type="text"
+        style={{ width: "50px" }}
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      />
+      <span
+        className="save-quantity-link link-primary"
+        onClick={updateCartItemQuantity}
+      >
+        Save
+      </span>
+    </>
+  ) : (
+    <>
+      <span>
+        Quantity: <span className="quantity-label">{cartItem.quantity}</span>
+      </span>
+      <span
+        className="update-quantity-link link-primary"
+        onClick={() => setIsUpdating(true)}
+      >
+        Update
+      </span>
+    </>
+  );
 
   return (
     <>
@@ -26,20 +67,7 @@ function CartItemDetails({
           {formatMoney(cartItem.product.priceCents)}
         </div>
         <div className="product-quantity">
-          <input
-            type="text"
-            style={{ width: "50px", display: updated ? "block" : "none" }}
-          />
-          <span>
-            Quantity:{" "}
-            <span className="quantity-label">{cartItem.quantity}</span>
-          </span>
-          <span
-            className="update-quantity-link link-primary"
-            onClick={() => setUpdated(true)}
-          >
-            Update
-          </span>
+          {quantityDisplay}{" "}
           <span
             className="delete-quantity-link link-primary"
             onClick={deleteCartItem}

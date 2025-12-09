@@ -33,6 +33,7 @@ function OrderSummary({
 
               <div className="cart-item-details-grid">
                 <CartItemDetails
+                  loadCart={loadCart}
                   cartItem={cartItem}
                   deleteCartItem={deleteCartItem}
                 />
