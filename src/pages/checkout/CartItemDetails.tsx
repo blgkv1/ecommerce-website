@@ -35,6 +35,13 @@ function CartItemDetails({
         style={{ width: "50px" }}
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            setIsUpdating(false);
+          } else if (e.key === "Enter") {
+            updateCartItemQuantity();
+          }
+        }}
       />
       <span
         className="save-quantity-link link-primary"
