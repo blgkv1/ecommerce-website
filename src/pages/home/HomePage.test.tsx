@@ -3,7 +3,6 @@ import HomePage from "./HomePage";
 import { render, screen, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import axios from "axios";
-import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 
 vi.mock("axios");
