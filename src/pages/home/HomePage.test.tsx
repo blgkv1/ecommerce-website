@@ -16,7 +16,7 @@ describe("HomePage component", () => {
   beforeEach(() => {
     loadCart = vi.fn();
 
-    axios.get.mockImplementation(async (urlPath: string) => {
+    (axios.get as any).mockImplementation(async (urlPath: string) => {
       if (urlPath === "/api/products") {
         return {
           data: [
