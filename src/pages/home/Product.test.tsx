@@ -25,6 +25,7 @@ describe("Product component", () => {
   let product: ProductType;
 
   let loadCart: () => void;
+  let user = userEvent.setup();
 
   beforeEach(() => {
     product = {
@@ -42,7 +43,7 @@ describe("Product component", () => {
     loadCart = vi.fn();
   });
 
-  it("describes product details correctly", () => {
+  it("describes product details correctly", async () => {
     render(<Product product={product} loadCart={loadCart} />);
 
     expect(
@@ -63,12 +64,35 @@ describe("Product component", () => {
   it('adds product to cart when "Add to Cart" button is clicked', async () => {
     render(<Product product={product} loadCart={loadCart} />);
 
-    const user = userEvent.setup();
     const addToCartButton = screen.getByTestId("add-to-cart-button");
     await user.click(addToCartButton);
     expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       quantity: 1,
+    });
+    expect(loadCart).toHaveBeenCalled();
+  });
+
+  it("correctly displays quantity selected when adding to cart", async () => {
+    render(<Product product={product} loadCart={loadCart} />);
+
+    const quantitySelector = screen.getByTestId("quantitySelector");
+    expect(quantitySelector).toBeInTheDocument();
+    expect(quantitySelector).toHaveValue("1");
+    await user.selectOptions(quantitySelector, "3");
+    expect(quantitySelector).toHaveValue("3");
+  });
+
+  it('adds correct quantity to cart when quantity is changed before clicking "Add to Cart" button', async () => {
+    render(<Product product={product} loadCart={loadCart} />);
+
+    const quantitySelector = screen.getByTestId("quantitySelector");
+    const addToCartButton = screen.getByTestId("add-to-cart-button");
+    await user.selectOptions(quantitySelector, "4");
+    await user.click(addToCartButton);
+    expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 4,
     });
     expect(loadCart).toHaveBeenCalled();
   });
