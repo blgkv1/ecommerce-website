@@ -1,6 +1,12 @@
 import { it, expect, describe, vi, beforeEach } from "vitest";
 import HomePage from "./HomePage";
-import { render, screen, within, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  within,
+  waitFor,
+  fireEvent,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import axios from "axios";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
@@ -111,11 +117,10 @@ describe("HomePage component", () => {
 
     // Update quantities
     firstQuantitySelector.value = "2";
+    fireEvent.change(firstQuantitySelector);
 
     secondQuantitySelector.value = "3";
-    secondQuantitySelector.dispatchEvent(
-      new Event("change", { bubbles: true })
-    );
+    fireEvent.change(secondQuantitySelector);
 
     // Get and click buttons
     const firstAddToCartButton = within(productContainers[0]).getByTestId(
