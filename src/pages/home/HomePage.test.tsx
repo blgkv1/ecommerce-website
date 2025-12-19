@@ -16,7 +16,19 @@ describe("HomePage component", () => {
   beforeEach(() => {
     loadCart = vi.fn();
 
-    (axios.post as any) = vi.fn().mockResolvedValue({});
+    (axios.post as any) = vi
+      .fn()
+      .mockImplementation((urlPath: string, data: any) => {
+        if (urlPath === "/api/cart-items") {
+          return Promise.resolve({
+            data: {
+              productId: data.productId,
+              quantity: data.quantity,
+              id: `cart-item-${Math.random()}`,
+            },
+          });
+        }
+      });
 
     (axios.get as any).mockImplementation(async (urlPath: string) => {
       if (urlPath === "/api/products") {
@@ -88,6 +100,24 @@ describe("HomePage component", () => {
       </MemoryRouter>
     );
     const productContainers = await screen.findAllByTestId("product-container");
+
+    // Get quantity selectors
+    const firstQuantitySelector = within(productContainers[0]).getByTestId(
+      "quantitySelector"
+    ) as HTMLSelectElement;
+    const secondQuantitySelector = within(productContainers[1]).getByTestId(
+      "quantitySelector"
+    ) as HTMLSelectElement;
+
+    // Update quantities
+    firstQuantitySelector.value = "2";
+
+    secondQuantitySelector.value = "3";
+    secondQuantitySelector.dispatchEvent(
+      new Event("change", { bubbles: true })
+    );
+
+    // Get and click buttons
     const firstAddToCartButton = within(productContainers[0]).getByTestId(
       "add-to-cart-button"
     );
@@ -102,11 +132,11 @@ describe("HomePage component", () => {
       expect(loadCart).toHaveBeenCalledTimes(2);
       expect(axios.post).toHaveBeenNthCalledWith(1, "/api/cart-items", {
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-        quantity: 1,
+        quantity: 2,
       });
       expect(axios.post).toHaveBeenNthCalledWith(2, "/api/cart-items", {
         productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-        quantity: 1,
+        quantity: 3,
       });
     });
   });
