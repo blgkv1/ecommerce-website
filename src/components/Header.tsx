@@ -26,7 +26,7 @@ function Header({ cart }: HeaderProps): JSX.Element {
     setSearch(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search.trim()) {
       navigate(`/?search=${encodeURIComponent(search)}`);
@@ -37,29 +37,29 @@ function Header({ cart }: HeaderProps): JSX.Element {
 
   return (
     <>
-      <div className="header">
-        <div className="left-section">
+      <header className="header">
+        <nav className="left-section">
           <NavLink to="/" className="header-link">
             <img className="logo" src="images/logo-white.png" />
             <img className="mobile-logo" src="images/mobile-logo-white.png" />
           </NavLink>
-        </div>
+        </nav>
 
-        <div className="middle-section">
+        <form className="middle-section" onSubmit={handleSubmit}>
           <input
             className="search-bar"
-            type="text"
+            type="search"
             placeholder="Search"
             value={search}
             onChange={handleSearch}
           />
 
-          <button className="search-button" onClick={handleSubmit}>
+          <button className="search-button" type="submit">
             <img className="search-icon" src="images/icons/search-icon.png" />
           </button>
-        </div>
+        </form>
 
-        <div className="right-section">
+        <nav className="right-section">
           <NavLink className="orders-link header-link" to="/orders">
             <span className="orders-text">Orders</span>
           </NavLink>
@@ -69,8 +69,8 @@ function Header({ cart }: HeaderProps): JSX.Element {
             <div className="cart-quantity">{totalQuantity}</div>
             <div className="cart-text">Cart</div>
           </NavLink>
-        </div>
-      </div>
+        </nav>
+      </header>
     </>
   );
 }
