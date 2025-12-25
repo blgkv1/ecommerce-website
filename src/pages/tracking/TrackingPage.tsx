@@ -68,8 +68,8 @@ function TrackingPage({ cart }: TrackingPageProps) {
 
       <Header cart={cart} />
 
-      <div className="tracking-page">
-        <div className="order-tracking">
+      <main className="tracking-page">
+        <section className="order-tracking">
           <Link className="back-to-orders-link link-primary" to="/orders">
             View all orders
           </Link>
@@ -109,8 +109,8 @@ function TrackingPage({ cart }: TrackingPageProps) {
               style={{ width: `${deliveryPercent}%` }}
             ></div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

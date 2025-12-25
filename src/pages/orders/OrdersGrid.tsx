@@ -10,7 +10,7 @@ function OrdersGrid({
   loadCart: () => void;
 }) {
   return (
-    <div className="orders-grid">
+    <section className="orders-grid">
       {orders.map((order) => {
         return (
           <div key={order.id} className="order-container">
@@ -20,7 +20,7 @@ function OrdersGrid({
           </div>
         );
       })}
-    </div>
+    </section>
   );
 }
 

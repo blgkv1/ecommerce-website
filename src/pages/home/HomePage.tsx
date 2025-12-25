@@ -42,9 +42,9 @@ function HomePage({ cart, loadCart }: { cart: any[]; loadCart: () => void }) {
 
       <Header cart={cart} />
 
-      <div className="home-page">
+      <main className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
-      </div>
+      </main>
     </>
   );
 }

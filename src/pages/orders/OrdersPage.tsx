@@ -33,11 +33,11 @@ function OrdersPage({ cart, loadCart }: OrdersPageProps) {
 
       <Header cart={cart} />
 
-      <div className="orders-page">
-        <div className="page-title">Your Orders</div>
+      <main className="orders-page">
+        <h1 className="page-title">Your Orders</h1>
 
         <OrdersGrid orders={orders} loadCart={loadCart} />
-      </div>
+      </main>
     </>
   );
 }

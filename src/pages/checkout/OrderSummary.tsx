@@ -13,7 +13,7 @@ function OrderSummary({
   loadCart: () => void;
 }) {
   return (
-    <div className="order-summary">
+    <section className="order-summary">
       {deliveryOptions.length > 0 &&
         cart.map((cartItem) => {
           const selectedDeliveryOption = deliveryOptions.find(
@@ -47,7 +47,7 @@ function OrderSummary({
             </div>
           );
         })}
-    </div>
+    </section>
   );
 }
 

@@ -18,8 +18,8 @@ function PaymentSummary({
   };
 
   return (
-    <div className="payment-summary">
-      <div className="payment-summary-title">Payment Summary</div>
+    <aside className="payment-summary">
+      <h2 className="payment-summary-title">Payment Summary</h2>
 
       {paymentSummary && (
         <>
@@ -66,7 +66,7 @@ function PaymentSummary({
           </button>
         </>
       )}
-    </div>
+    </aside>
   );
 }
 

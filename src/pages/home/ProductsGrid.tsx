@@ -9,13 +9,13 @@ interface ProductsGridProps {
 
 function ProductsGrid({ products, loadCart }: ProductsGridProps): JSX.Element {
   return (
-    <div className="products-grid">
+    <section className="products-grid">
       {products.map((product: CartProduct) => {
         return (
           <Product key={product.id} product={product} loadCart={loadCart} />
         );
       })}
-    </div>
+    </section>
   );
 }
 

@@ -5,14 +5,14 @@ import "./CheckoutHeader.css";
 function CheckoutHeader({ cart }: { cart: CartItem[] }) {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
-    <div className="checkout-header">
+    <header className="checkout-header">
       <div className="header-content">
-        <div className="checkout-header-left-section">
+        <nav className="checkout-header-left-section">
           <Link to="/">
             <img className="logo" src="images/logo.png" />
             <img className="mobile-logo" src="images/mobile-logo.png" />
           </Link>
-        </div>
+        </nav>
 
         <div className="checkout-header-middle-section">
           Checkout (
@@ -26,7 +26,7 @@ function CheckoutHeader({ cart }: { cart: CartItem[] }) {
           <img src="images/icons/checkout-lock-icon.png" />
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 
