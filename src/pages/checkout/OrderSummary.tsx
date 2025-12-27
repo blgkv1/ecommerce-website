@@ -2,14 +2,15 @@ import DeliveryOptions from "./DeliveryOptions";
 import CartItemDetails from "./CartItemDetails";
 import DeliveryDate from "./DeliveryDate";
 import axios from "axios";
+import type { CartItem, DeliveryOption } from "../../types/cart";
 
 function OrderSummary({
   cart,
   deliveryOptions,
   loadCart,
 }: {
-  cart: any[];
-  deliveryOptions: any[];
+  cart: CartItem[];
+  deliveryOptions: DeliveryOption[];
   loadCart: () => void;
 }) {
   return (
@@ -34,7 +35,11 @@ function OrderSummary({
               <div className="cart-item-details-grid">
                 <CartItemDetails
                   loadCart={loadCart}
-                  cartItem={cartItem}
+                  cartItem={
+                    cartItem as CartItem & {
+                      product: NonNullable<CartItem["product"]>;
+                    }
+                  }
                   deleteCartItem={deleteCartItem}
                 />
 
