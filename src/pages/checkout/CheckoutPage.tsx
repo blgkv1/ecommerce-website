@@ -4,16 +4,28 @@ import OrderSummary from "./OrderSummary";
 import PaymentSummary from "./PaymentSummary";
 import "./CheckoutPage.css";
 import CheckoutHeader from "./CheckoutHeader";
+import type { CartItem } from "../../types/cart";
+
+export interface PaymentSummaryData {
+  totalItems: number;
+  productCostCents: number;
+  shippingCostCents: number;
+  totalCostBeforeTaxCents: number;
+  taxCents: number;
+  totalCostCents: number;
+}
 
 function CheckoutPage({
   cart,
   loadCart,
 }: {
-  cart: any[];
+  cart: CartItem[];
   loadCart: () => void;
 }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState([null]);
+  const [paymentSummary, setPaymentSummary] = useState<PaymentSummaryData | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchDeliveryOptions = async () => {
@@ -31,7 +43,7 @@ function CheckoutPage({
 
   useEffect(() => {
     const fetchPaymentSummary = async () => {
-      const response = await axios.get("/api/payment-summary");
+      const response = await axios.get<PaymentSummaryData>("/api/payment-summary");
       setPaymentSummary(response.data);
     };
     fetchPaymentSummary();

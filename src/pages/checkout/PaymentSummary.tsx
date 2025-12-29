@@ -1,12 +1,13 @@
 import formatMoney from "../../utils/money";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import type { PaymentSummaryData } from "./CheckoutPage";
 
 function PaymentSummary({
   paymentSummary,
   loadCart,
 }: {
-  paymentSummary: any;
+  paymentSummary: PaymentSummaryData | null;
   loadCart: () => void;
 }) {
   const navigate = useNavigate();
