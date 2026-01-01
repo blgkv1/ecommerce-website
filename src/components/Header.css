@@ -92,6 +92,16 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   flex-shrink: 0;
+  transition: background-color 100ms linear;
+}
+
+.header .search-button:hover {
+  background-color: rgb(118, 187, 121);
+  cursor: pointer;
+}
+
+.header .search-button:active {
+  background-color: rgb(76, 126, 79);
 }
 
 .header .search-icon {
