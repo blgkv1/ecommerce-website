@@ -1,5 +1,5 @@
 import type { CartItem } from "../types/cart";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import "./Header.css";
 import { useState, useEffect, type JSX } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -13,6 +13,7 @@ function Header({ cart }: HeaderProps): JSX.Element {
   let totalQuantity = 0;
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("search") || "");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSearch(searchParams.get("search") || "");
@@ -21,6 +22,14 @@ function Header({ cart }: HeaderProps): JSX.Element {
   cart.forEach((cartItem) => {
     totalQuantity += cartItem.quantity;
   });
+
+  const handleSearchClick = () => {
+    if (search.trim()) {
+      navigate(`/?search=${encodeURIComponent(search)}`);
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -39,7 +48,11 @@ function Header({ cart }: HeaderProps): JSX.Element {
             onSelect={setSearch}
           />
 
-          <button className="search-button" type="submit">
+          <button
+            className="search-button"
+            type="submit"
+            onClick={handleSearchClick}
+          >
             <img className="search-icon" src="images/icons/search-icon.png" />
           </button>
         </div>
