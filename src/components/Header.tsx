@@ -1,8 +1,9 @@
 import type { CartItem } from "../types/cart";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import "./Header.css";
 import { useState, useEffect, type JSX } from "react";
 import { useSearchParams } from "react-router-dom";
+import { SearchDropdown } from "./SearchDropdown";
 
 interface HeaderProps {
   cart: CartItem[];
@@ -12,7 +13,6 @@ function Header({ cart }: HeaderProps): JSX.Element {
   let totalQuantity = 0;
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("search") || "");
-  const navigate = useNavigate();
 
   useEffect(() => {
     setSearch(searchParams.get("search") || "");
@@ -21,19 +21,6 @@ function Header({ cart }: HeaderProps): JSX.Element {
   cart.forEach((cartItem) => {
     totalQuantity += cartItem.quantity;
   });
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (search.trim()) {
-      navigate(`/?search=${encodeURIComponent(search)}`);
-    } else {
-      navigate("/");
-    }
-  };
 
   return (
     <>
@@ -45,19 +32,17 @@ function Header({ cart }: HeaderProps): JSX.Element {
           </NavLink>
         </nav>
 
-        <form className="middle-section" onSubmit={handleSubmit}>
-          <input
-            className="search-bar"
-            type="search"
-            placeholder="Search"
-            value={search}
-            onChange={handleSearch}
+        <div className="middle-section">
+          <SearchDropdown
+            searchValue={search}
+            onSearch={setSearch}
+            onSelect={setSearch}
           />
 
           <button className="search-button" type="submit">
             <img className="search-icon" src="images/icons/search-icon.png" />
           </button>
-        </form>
+        </div>
 
         <nav className="right-section">
           <NavLink className="orders-link header-link" to="/orders">
