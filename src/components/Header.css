@@ -71,6 +71,11 @@
   display: flex;
 }
 
+.header .search-bar.dropdown-open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .header .search-bar {
   flex: 1;
   width: 100%;

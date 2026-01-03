@@ -103,7 +103,9 @@ export function SearchDropdown({
   return (
     <div className="search-dropdown-container" ref={dropdownRef}>
       <input
-        className="search-bar"
+        className={`search-bar ${
+          isOpen && suggestions.length > 0 ? "dropdown-open" : ""
+        }`}
         type="search"
         placeholder="Search"
         value={searchValue}

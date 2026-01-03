@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   border-top: none;
   max-height: 400px;
   overflow-y: auto;
