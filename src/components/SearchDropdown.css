@@ -88,3 +88,24 @@
 .clear-button svg {
   display: block;
 }
+
+/* Hide native browser clear/cancel buttons for input[type="search"] */
+.search-bar::-webkit-search-cancel-button,
+.search-bar::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.search-bar::-ms-clear,
+.search-bar::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Ensure consistent appearance across browsers */
+.search-bar {
+  -webkit-appearance: none;
+  appearance: none;
+}
