@@ -21,6 +21,7 @@ export function SearchDropdown({
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (searchValue.trim().length > 0) {
@@ -100,9 +101,16 @@ export function SearchDropdown({
     }
   };
 
+  const handleClear = () => {
+    onSearch("");
+    setIsOpen(false);
+    inputRef.current?.focus();
+  };
+
   return (
     <div className="search-dropdown-container" ref={dropdownRef}>
       <input
+        ref={inputRef}
         className={`search-bar ${
           isOpen && suggestions.length > 0 ? "dropdown-open" : ""
         }`}
@@ -113,6 +121,39 @@ export function SearchDropdown({
         onKeyDown={handleKeyDown}
         onFocus={() => searchValue.trim().length > 0 && setIsOpen(true)}
       />
+
+      {searchValue && (
+        <button
+          type="button"
+          className="clear-button"
+          aria-label="Clear search"
+          onClick={handleClear}
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
+          >
+            <path
+              d="M18 6L6 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
 
       {isOpen && suggestions.length > 0 && (
         <div className="dropdown-menu">

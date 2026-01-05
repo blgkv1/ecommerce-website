@@ -62,3 +62,29 @@
   color: #666;
   margin-top: 2px;
 }
+
+/* Clear (delete-all) cross button inside the search input */
+.clear-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b6b6b;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clear-button:hover {
+  color: #333;
+}
+
+.clear-button svg {
+  display: block;
+}
