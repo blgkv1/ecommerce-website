@@ -25,7 +25,7 @@ function CheckoutHeader({ cart }: { cart: CartItem[] }) {
         <div className="checkout-header-right-section">
           <svg
             className="credit-card-icon"
-            style={{ width: "32px", height: "32px", fill: "#555" }}
+            style={{ width: "32px", height: "32px" }}
           >
             <use href="/images/icons/sprite.svg#icon-credit-card" />
           </svg>
