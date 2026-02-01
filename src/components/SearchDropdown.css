@@ -7,10 +7,10 @@
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
+  left: -1px;
+  right: -2px;
   background-color: white;
-  border: 1px solid light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border: 2px solid rgb(25, 135, 84);
   border-top: none;
   max-height: 400px;
   overflow-y: auto;
