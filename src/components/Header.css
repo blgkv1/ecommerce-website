@@ -16,7 +16,7 @@
 }
 
 .header .left-section {
-  width: 208px;
+  width: auto;
 }
 
 @media (max-width: 800px) {
@@ -71,6 +71,14 @@
   display: flex;
 }
 
+@media screen and (min-width: 1670px) {
+  .header .middle-section {
+    max-width: unset;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
 .header .search-bar.dropdown-open {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -117,7 +125,7 @@
 }
 
 .header .right-section {
-  width: 180px;
+  width: auto;
   flex-shrink: 0;
   display: flex;
   justify-content: end;
