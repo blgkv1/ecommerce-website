@@ -19,6 +19,7 @@ export function SearchDropdown({
   const [suggestions, setSuggestions] = useState<CartProduct[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [lastSelected, setLastSelected] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -28,10 +29,12 @@ export function SearchDropdown({
       const fetchSuggestions = async () => {
         try {
           const response = await axios.get(
-            `/api/products?search=${searchValue}`
+            `/api/products?search=${searchValue}`,
           );
           setSuggestions(response.data.slice(0, 5));
-          setIsOpen(true);
+          if (searchValue !== lastSelected) {
+            setIsOpen(true);
+          }
           setHighlightedIndex(-1);
         } catch (error) {
           console.error("Error fetching suggestions:", error);
@@ -67,7 +70,7 @@ export function SearchDropdown({
       case "ArrowDown":
         e.preventDefault();
         setHighlightedIndex((prev) =>
-          prev < suggestions.length - 1 ? prev + 1 : prev
+          prev < suggestions.length - 1 ? prev + 1 : prev,
         );
         break;
       case "ArrowUp":
@@ -89,6 +92,8 @@ export function SearchDropdown({
   };
 
   const handleSelectProduct = (product: CartProduct) => {
+    setLastSelected(product.name);
+    setSuggestions([]);
     onSelect(product.name);
     setIsOpen(false);
     navigate(`/?search=${encodeURIComponent(product.name)}`);
@@ -117,7 +122,10 @@ export function SearchDropdown({
         type="search"
         placeholder="Search"
         value={searchValue}
-        onChange={(e) => onSearch(e.target.value)}
+        onChange={(e) => {
+          setLastSelected(null);
+          onSearch(e.target.value);
+        }}
         onKeyDown={handleKeyDown}
         onFocus={() => searchValue.trim().length > 0 && setIsOpen(true)}
       />
