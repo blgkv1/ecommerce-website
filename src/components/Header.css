@@ -1,9 +1,6 @@
 .header {
   background-color: rgb(8, 79, 45);
   color: white;
-  padding-left: 15px;
-  padding-right: 15px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +30,7 @@
 
 .header .header-link {
   display: inline-block;
-  padding: 6px 9.5px;
+  padding: 6px 20px;
   border-radius: 2px;
   cursor: pointer;
   text-decoration: none;
@@ -176,7 +173,7 @@
 
   position: absolute;
   top: 8.5px;
-  right: 46px;
+  right: 57px;
 
   width: 26px;
   text-align: center;
