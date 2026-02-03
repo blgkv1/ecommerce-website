@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header";
 import ProductsGrid from "./ProductsGrid";
+import Footer from "../../components/Footer";
 import type { CartItem } from "../../types/cart";
 import type { CartProduct } from "../../types/products";
 import "./HomePage.css";
@@ -41,6 +42,7 @@ function HomePage({
       <main className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
       </main>
+      <Footer />
     </>
   );
 }
