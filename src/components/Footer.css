@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 10px 0 10px 20px;
+  margin: 0;
+
+  gap: 10px;
+}
