@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: end;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .footer-links {

@@ -1,9 +1,24 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: Roboto, Arial;
   color: rgb(33, 33, 33);
-  /* The <body> element has a default margin of 8px
-     on all sides. This removes the default margins. */
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 /* Remove the default margins of <p> elements. */
