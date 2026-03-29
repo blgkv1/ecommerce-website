@@ -14,10 +14,12 @@
     "prebuild": "npm run typecheck"
   },
   "dependencies": {
-    "axios": "^1.13.2",
+    "axios": "^1.14.0",
     "dayjs": "^1.11.19",
+    "flatted": "^3.4.2",
     "js-yaml": "^4.1.1",
     "lodash": "^4.17.23",
+    "minimatch": "^10.2.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router": "^7.13.0",
